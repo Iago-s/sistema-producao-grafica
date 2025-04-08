@@ -3,13 +3,9 @@ const Product = require('../models/sql/Products');
 const ProductController = {
     async create(req, res) {
         try {
-            const { name, hasVariants, variant } = req.body;
+            const { name } = req.body;
 
-            const newProduct = await Product.create({
-                name,
-                hasVariants, 
-                variant
-            });
+            const newProduct = await Product.create({ name });
 
             return res.status(201).json(newProduct);
         } catch (error) {
@@ -50,14 +46,14 @@ const ProductController = {
     async update(req, res) {
         try {
             const { id } = req.params;
-            const { name, hasVariants, variant } = req.body;
+            const { name } = req.body;
 
             const product = await Product.findByPk(id);
             if(!product){
                 return res.status(404).json({ message: 'Produto não encontrado' });
             }
 
-            await product.update({ name, hasVariants, variant });
+            await product.update({ name });
 
             return res.status(200).json(product);
         } catch (error){
