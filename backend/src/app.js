@@ -13,11 +13,10 @@ app.use(cors());
 app.use(express.json());
 
 // Database
-require('./config/db.sql');
 require('./config/db.mongo');
 
 // Rotas
-const routes = require('./routes')
-app.use('./api', routes);
+const routes = require('./routes/index');
+app.use('/api', routes);
 
 module.exports = app;
